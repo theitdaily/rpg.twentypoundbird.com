@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Наследие Октавиана — живая настольная ролевая кампания, где решения игроков меняют историю мира.">
+  <title>Наследие Октавиана — живая настольная ролевая кампания</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root{
+      --bg:#080d0e; --bg2:#0d1719; --panel:#0d181aee; --panel2:#111d1f;
+      --gold:#d9ad56; --gold2:#f0d18a; --text:#eee4cf; --muted:#b9ad98;
+      --line:rgba(217,173,86,.42); --shadow:0 24px 70px rgba(0,0,0,.58);
+      --serif:Georgia,"Times New Roman",serif; --sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:#071012;color:var(--text);font-family:var(--serif);line-height:1.55;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(5,12,13,.9),rgba(5,12,13,.94)),url('assets/stone.jpg') center/520px auto;z-index:-2}
+    body::after{content:"";position:fixed;inset:0;background-image:radial-gradient(circle at 16% 7%,rgba(220,173,76,.11),transparent 30%),radial-gradient(circle at 86% 30%,rgba(50,115,111,.12),transparent 34%);pointer-events:none;z-index:-1}
+    a{color:inherit}.container{width:min(1240px,92vw);margin:auto}.section{padding:116px 0 30px}.eyebrow{padding-bottom: 6px;font:700 .74rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}
+    h1,h2,h3{font-weight:500;letter-spacing:.035em;margin:0} h2{font-size:clamp(2rem,4vw,3.35rem);text-align:center;color:var(--gold2)}
+    .section-lead{max-width:780px;margin:16px auto 0;text-align:center;color:var(--muted);font-size:1.08rem}
+    .ornament{height:14px;width:min(520px,76vw);margin:22px auto;background:linear-gradient(90deg,transparent,var(--line),var(--gold),var(--line),transparent);clip-path:polygon(0 46%,42% 46%,45% 0,48% 46%,52% 46%,55% 0,58% 46%,100% 46%,100% 54%,58% 54%,55% 100%,52% 54%,48% 54%,45% 100%,42% 54%,0 54%)}
+    .nav{position:fixed;inset:0 0 auto;z-index:50;background:linear-gradient(180deg,rgba(5,10,11,.97),rgba(5,10,11,.88));border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .nav-inner{height:78px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto}.brand-mark{width:48px;height:48px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:1.4rem;box-shadow:inset 0 0 22px rgba(217,173,86,.13)}.brand-name{font-size:1.16rem;line-height:1.05;color:var(--gold2);text-transform:uppercase;letter-spacing:.08em}
+    .nav-links{display:flex;align-items:center;gap:24px;font-family:var(--sans);font-size:.9rem}.nav-links a{text-decoration:none;color:#d7cab2}.nav-links a:hover{color:var(--gold2)}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 23px;border:1px solid var(--line);text-decoration:none;font:700 .85rem var(--sans);letter-spacing:.055em;text-transform:uppercase;transition:.2s ease;position:relative;overflow:hidden}.button:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35);border-color:var(--gold2)}.button-primary{color:#211508;background:linear-gradient(180deg,#edcb78,#bd8335)}.button-secondary{background:rgba(6,17,19,.7);color:var(--gold2)}
+    .menu-button{display:none;background:none;border:1px solid var(--line);color:var(--gold2);width:44px;height:44px;font-size:1.25rem}
+    .hero{min-height:790px;padding-top:78px;position:relative;display:flex;align-items:center;border-bottom:1px solid var(--line);overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(4,10,11,.97) 0%,rgba(4,10,11,.84) 38%,rgba(4,10,11,.2) 68%,rgba(4,10,11,.58) 100%),linear-gradient(180deg,rgba(0,0,0,.15),rgba(3,8,9,.75)),url('assets/hero.jpg');background-position:center;background-size:cover;transform:scale(1.015)}.hero-content{position:relative;width:min(760px,90vw);padding:100px 0 80px}.hero .eyebrow{text-shadow:0 2px 5px #000}.hero h1{font-size:clamp(3.4rem,7vw,6.6rem);line-height:.92;color:var(--gold2);text-transform:uppercase;text-shadow:0 5px 24px rgba(0,0,0,.72)}.hero p{font-size:clamp(1.08rem,1.7vw,1.35rem);max-width:650px;color:#ded2bb;margin:28px 0 34px}.hero-actions{display:flex;gap:14px;flex-wrap:wrap}.hero-note{margin-top:28px;color:#c8bba4;font-family:var(--sans);font-size:.88rem;display:flex;gap:18px;flex-wrap:wrap}.hero-note span::before{content:"◆";color:var(--gold);margin-right:8px;font-size:.65rem}
+    .features{margin-top:-164px;position:relative;z-index:3;padding-top: 110px}.feature-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.feature-card,.panel,.step{background:linear-gradient(180deg,rgba(15,28,30,.97),rgba(7,17,18,.97));border:1px solid var(--line);box-shadow:var(--shadow);position:relative}.feature-card::after,.panel::after,.step::after{content:"";position:absolute;inset:7px;border:1px solid rgba(217,173,86,.18);pointer-events:none}.feature-card{min-height:250px;text-align:center;padding:24px 12px 20px}.feature-card img{width:84px;height:84px;object-fit:cover;border-radius:50%;mix-blend-mode:screen}.feature-card h3{font-size:1rem;color:var(--gold2);text-transform:uppercase;line-height:1.15;margin:10px 0}.feature-card p{font-size:.87rem;color:var(--muted);margin:0}
+    .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.panel{padding:32px}.panel-title{display:flex;align-items:center;gap:15px;margin-bottom:24px}.panel-title img{width:52px;height:52px;object-fit:cover;border-radius:50%;mix-blend-mode:screen}.panel-title h3{font-size:1.55rem;color:var(--gold2);text-transform:uppercase}.info-list{list-style:none;padding:0;margin:0;display:grid;gap:15px}.info-list li{padding-left:24px;position:relative;color:#d5c9b4}.info-list li::before{content:"✦";position:absolute;left:0;color:var(--gold)}.schedule strong{display:block;color:var(--gold2);font-size:1.1rem}.schedule small{color:var(--muted);font-family:var(--sans)}
+    .rules-preview{background:linear-gradient(rgba(8,16,16,.78),rgba(8,16,16,.84)),url('assets/parchment.jpg') center/cover}.rules-link{display:inline-block;margin-top:24px;color:var(--gold2);text-decoration:none;border-bottom:1px solid var(--line)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.step{padding:34px 28px;min-height:285px}.step-number{position:absolute;right:22px;top:18px;font-size:4rem;line-height:1;color:rgba(217,173,86,.15)}.step img{width:72px;height:72px;object-fit:cover;border-radius:50%;mix-blend-mode:screen}.step h3{margin:14px 0 10px;color:var(--gold2);font-size:1.35rem;text-transform:uppercase}.step p{color:var(--muted);margin:0}.cta{text-align:center;margin-top:34px}
+    .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}.social{display:flex;align-items:center;gap:18px;padding:18px 22px;background:#091416;border:1px solid var(--line);text-decoration:none;transition:.2s ease}.social:hover{transform:translateY(-3px);border-color:var(--gold2)}.social img{width:62px;height:62px;object-fit:cover;border-radius:12px;mix-blend-mode:screen}.social b{display:block;font:700 1.05rem var(--sans);color:var(--gold2)}.social span{color:var(--muted);font-size:.9rem}
+    footer{margin-top: 75px;border-top:1px solid var(--line);padding:46px 0 25px;background:linear-gradient(rgba(4,10,11,.94),rgba(4,10,11,.98)),url('assets/decor.jpg') center bottom/cover}.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}.footer-grid p,.footer-grid a{color:var(--muted)}.footer-links{display:grid;gap:8px}.footer-links a{text-decoration:none}.footer-links a:hover{color:var(--gold2)}.copyright{margin-top:38px;padding-top:20px;border-top:1px solid rgba(217,173,86,.18);display:flex;justify-content:space-between;gap:20px;color:#8f8778;font:12px var(--sans)}
+
+    .rules-shell{margin-top:28px}.rules-toolbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .rule-filter{appearance:none;border:1px solid var(--line);background:rgba(8,18,19,.88);color:#d9cdb8;padding:11px 17px;font:700 .78rem var(--sans);letter-spacing:.055em;text-transform:uppercase;cursor:pointer;transition:.18s ease}
+    .rule-filter:hover,.rule-filter.is-selected{color:#231708;background:linear-gradient(180deg,#edcb78,#bd8335);border-color:var(--gold2);transform:translateY(-1px)}
+    .rule-filter.active-filter:not(.is-selected){border-color:rgba(217,173,86,.55)}.rule-filter.future-filter:not(.is-selected){border-style:dashed}.rule-filter.canceled-filter:not(.is-selected){opacity:.72}
+    .rules{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;counter-reset:rule}
+    .rule{position:relative;padding:27px 25px;background:linear-gradient(180deg,rgba(15,28,30,.97),rgba(7,17,18,.97));border:1px solid rgba(217,173,86,.32);box-shadow:0 16px 45px rgba(0,0,0,.32);overflow:hidden;transition:opacity .18s ease,transform .18s ease,border-color .18s ease}
+    .rule::after{content:"";position:absolute;inset:7px;border:1px solid rgba(217,173,86,.12);pointer-events:none}.rule>*{position:relative;z-index:1}
+    .rule-head{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}.rule-title{color:var(--gold2);font-size:1.08rem;line-height:1.3}.rule-text{margin:13px 0 0;color:var(--muted)}
+    .rule-badge{display:inline-flex;align-items:center;min-height:25px;padding:4px 9px;border:1px solid var(--line);font:700 .66rem var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+    .rule-badge.is-active{color:#171006;background:var(--gold)}.rule.is-active{border-color:rgba(217,173,86,.5)}
+    .rule-badge.is-future{color:#d7cab2;background:rgba(157,214,200,.08);border-style:dashed}.rule.is-future{border-style:dashed;opacity:.86}
+    .rule-badge.is-canceled{color:#aaa097;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18)}.rule.is-canceled{opacity:.57;filter:grayscale(.25)}.rule.is-canceled .rule-title,.rule.is-canceled .rule-text{text-decoration:line-through;text-decoration-color:rgba(238,228,207,.35)}
+    .rule.is-hidden{display:none}
+    @media(max-width:1080px){.rules{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(4,1fr)}.info-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.socials{grid-template-columns:1fr}.nav-links{display:none}.menu-button{display:block}.nav.open .nav-links{display:flex;position:absolute;top:78px;left:0;right:0;padding:22px 4vw;background:#071012;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}}
+    @media(max-width:720px){.section{padding:58px 0}.hero{min-height:720px}.hero::before{background-position:62% center}.hero h1{font-size:3.35rem}.feature-grid{grid-template-columns:repeat(2,1fr)}.feature-card{min-height:230px}.footer-grid{grid-template-columns:1fr}.copyright{flex-direction:column}.brand-name{font-size:.92rem}.nav .button{display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.social{transition:none}}
+  </style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">✦</span><span class="brand-name">Наследие<br>Октавиана</span></a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#world">О мире</a><a href="#schedule">Расписание</a><a href="#rules">Правила</a><a href="#start">Как начать</a><a href="#links">Ссылки</a>
+    </nav>
+    <a class="button button-secondary" href="https://hub.twentypoundbird.com/lk/octavian-legacy">Личный кабинет</a>
+    <button class="menu-button" id="menuButton" aria-label="Открыть меню" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="container"><div class="hero-content">
+    <div class="eyebrow">Живая настольная ролевая кампания</div>
+    <h1>Наследие<br>Октавиана</h1>
+    <p>Мир меча и магии, где руины шепчут легенды, державы борются за влияние, а решения героев навсегда меняют ход истории.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="https://forms.gle/DLSGyZmvq5KvYivA8" target="_blank" rel="noopener">Подать заявку</a>
+      <a class="button button-secondary" href="https://hub.twentypoundbird.com/lk/octavian-legacy">Личный кабинет</a>
+    </div>
+    <div class="hero-note"><span>Онлайн-игры</span><span>Партии по 3–4 часа</span><span>Общий живой мир</span></div>
+  </div></div>
+</section>
+
+<section class="features" id="world"><div class="container"><div class="feature-grid">
+  <article class="feature-card"><img src="assets/icon-heroic.jpg" alt=""><h3>Героическое фэнтези</h3><p>Эпические истории, сражения и магия.</p></article>
+  <article class="feature-card"><img src="assets/icon-regions.jpg" alt=""><h3>Регионы и культуры</h3><p>Народы, континенты и разные традиции.</p></article>
+  <article class="feature-card"><img src="assets/icon-prophecy.jpg" alt=""><h3>Легенды и пророчества</h3><p>Ваш выбор способен изменить будущее.</p></article>
+  <article class="feature-card"><img src="assets/icon-dragon.jpg" alt=""><h3>Подземелья и драконы</h3><p>Опасности, сокровища и чудовища.</p></article>
+  <article class="feature-card"><img src="assets/icon-classes.jpg" alt=""><h3>Все расы и классы</h3><p>Свобода создать своего героя.</p></article>
+  <article class="feature-card"><img src="assets/icon-worldtree.jpg" alt=""><h3>Мир живёт всегда</h3><p>История продолжается между сессиями.</p></article>
+  <article class="feature-card"><img src="assets/icon-castle.jpg" alt=""><h3>Создай империю</h3><p>Влияй на политику и оставь след.</p></article>
+</div></div></section>
+
+<section class="section" id="schedule"><div class="container">
+  <h2>Игры и кампания</h2><div class="ornament"></div>
+  <div class="info-grid">
+    <article class="panel schedule"><div class="panel-title"><img src="assets/icon-calendar.jpg" alt=""><h3>Расписание</h3></div><ul class="info-list">
+      <li><strong>Пн–Чт — 16:15–20:45</strong><small>Сессия может начаться в любое запланированное время, главное, чтобы игра закончилась до 20:45.</small></li>
+      <li><strong>Пт–Сб — 16:30–21:30</strong><small>Точное начало согласуется для выбранной партии.</small></li>
+      <li><strong>Продолжительность — 3–4 часа</strong><small>Для участия важно иметь свободное окно на всю сессию.</small></li>
+    </ul></article>
+    <article class="panel"><div class="panel-title"><img src="assets/icon-worldtree.jpg" alt=""><h3>О кампании</h3></div><ul class="info-list">
+      <li>Героическое фэнтези с меняющейся атмосферой.</li><li>Общий мир для нескольких параллельных групп.</li><li>Политика, войны, исследования и личные линии.</li><li>Решения игроков имеют долгосрочные последствия.</li><li>Онлайн-игра в дружелюбном сообществе.</li>
+    </ul></article>
+
+  </div>
+</div></section>
+
+
+<section class="section rules-section" id="rules"><div class="container">
+  <h2>Домашние правила</h2><div class="ornament"></div>
+  <p class="section-lead">Все правила доступны публично. Выберите статус, чтобы отфильтровать список.</p>
+  <div class="rules-toolbar" aria-label="Фильтр домашних правил">
+    <button class="rule-filter" type="button" data-filter="all" aria-pressed="true">Все</button>
+    <button class="rule-filter active-filter is-selected" type="button" data-filter="is-active" aria-pressed="false">Действующие</button>
+    <button class="rule-filter future-filter" type="button" data-filter="is-future" aria-pressed="false">В планах</button>
+    <button class="rule-filter canceled-filter" type="button" data-filter="is-canceled" aria-pressed="false">Отменённые</button>
+  </div>
+  <div class="rules-shell">
+    <ol aria-label="Список домашних правил" class="rules">
+<li class="rule is-active">
+<div class="rule-head">
+<span class="rule-badge is-active">Действует</span>
+<span class="rule-title">В бою можно говорить не только в свой ход</span>
+</div>
+<p class="rule-text">
+                        Короткие реплики и координация допустимы в любой момент боя — в рамках здравого смысла и темпа
+                        сцены.
+                    </p>
+</li>
+<li class="rule is-active">
+<div class="rule-head">
+<span class="rule-badge is-active">Действует</span>
+<span class="rule-title">«Последний шанс» против “сломать игру”</span>
+</div>
+<p class="rule-text">
+                        Если игрок собирается сделать действие, которое почти гарантированно разрушит сцену/кампанию
+                        из-за забытых фактов, он делает <b>спасбросок Интеллекта</b>.
+                        При успехе мастер <b>может</b> наративно напомнить ключевую информацию.
+                    </p>
+</li>
+<li class="rule is-active">
+<div class="rule-head">
+<span class="rule-badge is-active">Действует</span>
+<span class="rule-title">Переброс ХП при “1” на уровне</span>
+</div>
+<p class="rule-text">
+                        При повышении уровня (и при генерации ХП на старте) если на кости ХП выпала <b>1</b> — можно <b>перебросить</b>.
+                    </p>
+</li>
+<li class="rule is-active">
+<div class="rule-head">
+<span class="rule-badge is-active">Действует</span>
+<span class="rule-title">Правило «Щёлк» — мгновенная реакция</span>
+</div>
+<p class="rule-text">
+                        Когда мастер говорит <b>«Щёлк»</b>, у игроков есть <b>5–10 секунд</b>, чтобы сказать, что они
+                        делают.
+                        Это — реакция на внезапное событие (ловушка, обвал, выстрел и т.п.).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Долгий отдых: «три ночи подряд»</span>
+</div>
+<p class="rule-text">
+                        При попытке уснуть на <b>длительном отдыхе</b> каждый персонаж бросает <b>1d4</b>.
+                        Если у тебя выпало <b>три ночи подряд 1</b> — получаешь <b>1 уровень истощения</b>.
+                        Если <b>три ночи подряд 4</b> — получаешь <b>вдохновение</b>.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Инициатива “критует”</span>
+</div>
+<p class="rule-text">
+                        Если на инициативе <b>20</b> — первый ход совершаешь <b>с преимуществом</b>.
+                        Если <b>1</b> — с <b>помехой</b>. Порядок ходов считается как обычно.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">«3 секунды» на заявку в свой ход</span>
+</div>
+<p class="rule-text">
+                        Если игрок быстро формулирует действие (буквально за пару секунд) — получает
+                        <b>+1 к броскам атаки</b> и <b>+1 к СЛ спасбросков</b> от своих заклинаний до конца хода.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Зелья как бонусное действие (варианты)</span>
+</div>
+<p class="rule-text">
+                        Варианты на выбор кампанией:
+                        <b>(1)</b> пить зелье бонусным действием;
+                        <b>(2)</b> если пьёшь зелье полным действием — получаешь <b>максимальный эффект</b> (без
+                        бросков);
+                        <b>(3)</b> “поясная сумка”: бонусным действием можно пить только <b>экипированные</b> зелья.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Фланкирование: -2 к КД окружённому</span>
+</div>
+<p class="rule-text">
+                        Окружённый противник получает <b>-2 к КД</b>, но это не работает, если у него
+                        <b>Пассивная внимательность 18+</b> или есть “особое зрение” (эхолокация и т.п.).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Скользящий удар</span>
+</div>
+<p class="rule-text">
+                        Если итог попадания <b>ровно равен КД</b> цели — урон делится на <b>2</b> (округление вниз).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Падение до 0 ХП = истощение</span>
+</div>
+<p class="rule-text">
+                        Каждый раз, когда персонаж падает до <b>0 ХП</b> и затем поднимается союзником (не воскрешение),
+                        он получает <b>1 уровень истощения</b>.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Спасброски от смерти — в закрытую мастером</span>
+</div>
+<p class="rule-text">
+                        Броски “смертельных спасов” делает мастер <b>скрытно</b>. Результат известен только по итогу:
+                        выжил персонаж или умер. Это усиливает напряжение и цену решений.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Кости напряжённости (d6 в чашу)</span>
+</div>
+<p class="rule-text">
+                        Если в сцене есть табу/опасное действие и кто-то его совершает — он кладёт в “чашу” <b>d6</b>.
+                        Когда чаша переполняется — срабатывает негативный эффект (обвал, урон, подкрепление врагов и
+                        т.д.).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Интеллект помогает учиться</span>
+</div>
+<p class="rule-text">
+                        Модификатор <b>Интеллекта</b> определяет, сколько “единиц обучения” можно вложить в языки,
+                        инструменты и навыки (например, <b>+3</b> даёт <b>3</b> пункта обучения).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Воскрешения требуют условий</span>
+</div>
+<p class="rule-text">
+                        Воскрешение не работает “по умолчанию”: нужны специальные условия
+                        (ритуал, редкие компоненты, заранее подготовленные “якоря” вроде крестражей и т.п.).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Вдохновение как колода карт</span>
+</div>
+<p class="rule-text">
+                        Вместо обычного вдохновения используется колода одноразовых эффектов
+                        (доп. действие, узнать уязвимость, подсмотреть ХП и т.п.).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Критический удар: максимум ×2 (варианты)</span>
+</div>
+<p class="rule-text">
+                        Варианты: <b>(1)</b> крит наносит <b>максимальный урон ×2</b>;
+                        <b>(2)</b> вместо удвоения урона можно выбрать <b>рану</b> с последствиями
+                        (например, попадание в ногу снижает скорость).
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Запугивание через Силу</span>
+</div>
+<p class="rule-text">
+                        Можно использовать <b>Силу</b> для запугивания, если это логично в сцене и наративно обосновано.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">«Помощь» вне боя — только при релевантных умениях</span>
+</div>
+<p class="rule-text">
+                        Помогать можно лишь тем, кто действительно способен помочь.
+                        Пример: хилый маг не усилит “поднять валун” лучше, чем огр — нужен другой подход или это
+                        невозможно.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Игрок на время получает власть над повествованием</span>
+</div>
+<p class="rule-text">
+                        Иногда мастер может позволить игроку добавить деталь мира/сцены.
+                        Если заявка слишком безумная — мастер отклоняет, либо это “бред/иллюзия”, и персонаж получает
+                        дебаф.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Очки сюжета</span>
+</div>
+<p class="rule-text">
+                        Со временем мастер может выдавать <b>очки сюжета</b>.
+                        Потратив их, игрок может заявить значимое изменение мира/создание элемента сюжета —
+                        на короткое время становясь “DM”.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Совместные действия при совпадении инициативы</span>
+</div>
+<p class="rule-text">
+                        Если у двух или более персонажей совпадает инициатива, они могут объявить
+                        <b>совместное действие</b>. Эффект и бонусы определяются мастером исходя из логики сцены.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Заклинания без компонентов</span>
+</div>
+<p class="rule-text">
+                        Варианты использования:
+                        <b>(1)</b> заклинания не требуют материальных компонентов;
+                        <b>(2)</b> вместо стандартных компонентов используется <b>единый набор компонентов мага</b>.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Вес и переносимый инвентарь</span>
+</div>
+<p class="rule-text">
+                        Используется один из вариантов:
+                        <b>(1)</b> вес не отслеживается вовсе;
+                        <b>(2)</b> упрощённый инвентарь — предметы делятся на
+                        <i>лёгкие, средние и тяжёлые</i>, либо учитываются только громоздкие вещи.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Атака второй рукой любым оружием</span>
+</div>
+<p class="rule-text">
+                        Любое оружие можно использовать для атаки бонусным действием второй рукой,
+                        даже если оно не имеет свойства <b>лёгкое</b>, однако данная атака совершается <b>с помехой</b>.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Огромный урон: шок и травмы</span>
+</div>
+<p class="rule-text">
+                        При получении <b>чрезвычайно большого урона</b> (например, 70% от максимального ХП за один раз)
+                        существо получает негативный эффект — <b>шок</b>.
+                        Альтернативный вариант — получение <b>длительной травмы</b>.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Навыки могут критовать</span>
+</div>
+<p class="rule-text">
+                        Проверки навыков могут иметь критический успех или провал.
+                        Эффект крита определяется мастером и выходит за рамки обычного бонуса к броску.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Прокачка оружия</span>
+</div>
+<p class="rule-text">
+                        Оружие может развиваться вместе с персонажем:
+                        получать улучшения, модификации или уникальные свойства
+                        в результате использования, сюжетных событий или особых ритуалов. Используется, в основном, для
+                        наратива - например, у игрока есть фамильный меч, который придётся обменять на более сильный по
+                        урону. С механикой улучшения оружения игроку не придётся делать такой выбор, ведь он сможет
+                        улучшить своё оружие позже.
+                    </p>
+</li>
+<li class="rule is-future is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-future">В планах</span>
+<span class="rule-title">Отыгрыш архетипов и повышение уровня</span>
+</div>
+<p class="rule-text">
+                        Повышение уровня и выбор архетипа должны быть
+                        <b>наративно обоснованы</b> и отыграны в мире.
+                        Мастер может потребовать сцену, обучение или событие для подтверждения роста персонажа.
+                    </p>
+</li>
+<li class="rule is-canceled is-hidden">
+<div class="rule-head">
+<span class="rule-badge is-canceled">Отменено</span>
+<span class="rule-title">Отменённый пример</span>
+</div>
+<p class="rule-text">
+                        Этот пункт — демонстрация визуального статуса “отменено”.
+                        У правила может быть причина/заметка.
+                    </p>
+</li>
+</ol>
+  </div></section>
+
+<section class="section" id="start"><div class="container">
+  <h2>Как начать играть</h2><div class="ornament"></div><p class="section-lead">Три шага, после которых вы сможете выбрать подходящую партию и присоединиться к истории.</p>
+  <div class="steps" style="margin-top:34px">
+    <article class="step"><span class="step-number">1</span><img src="assets/icon-application.jpg" alt=""><h3>Заполни заявку</h3><p>Расскажи о себе, игровом опыте, предпочтениях и персонаже. Это поможет понять, подойдём ли мы друг другу.</p></article>
+    <article class="step"><span class="step-number">2</span><img src="assets/icon-member.jpg" alt=""><h3>Получи роль участника</h3><p>После рассмотрения заявки тебе выдадут роль участника и откроют доступ к основным разделам сообщества.</p></article>
+    <article class="step"><span class="step-number">3</span><img src="assets/icon-swords.jpg" alt=""><h3>Присоединяйся к игре</h3><p>Зайди в личный кабинет, выбери партию, узнай подробности и начни своё приключение в живом мире.</p></article>
+  </div>
+  <div class="cta"><a class="button button-primary" href="https://forms.gle/DLSGyZmvq5KvYivA8" target="_blank" rel="noopener">Подать заявку и начать путь</a></div>
+</div></section>
+
+<section class="section" id="links"><div class="container">
+  <h2>Сообщество и ссылки</h2><div class="ornament"></div><p class="section-lead">Новости кампании, общение между игроками и материалы о мире.</p>
+  <div class="socials">
+    <a class="social" href="https://www.youtube.com/@octavianlegacy" target="_blank" rel="noopener"><img src="assets/icon-youtube.jpg" alt=""><div><b>YouTube</b><span>Видео, хроники и материалы кампании</span></div></a>
+    <a class="social" href="https://discord.gg/Hvka4M8APX" target="_blank" rel="noopener"><img src="assets/icon-discord.jpg" alt=""><div><b>Discord</b><span>Основное общение участников</span></div></a>
+    <a class="social" href="https://t.me/octavianlegacy" target="_blank" rel="noopener"><img src="assets/icon-telegram.jpg" alt=""><div><b>Telegram</b><span>Новости и объявления</span></div></a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid"><div><div class="brand-name">Наследие<br>Октавиана</div><p>Живой мир. Живые истории.<br>Герои, меняющие ход эпох.</p></div>
+  <div><div class="eyebrow">Навигация</div><div class="footer-links"><a href="#world">О мире</a><a href="#schedule">Расписание</a><a href="#start">Как начать</a><a href="#rules">Правила</a></div></div>
+  <div><div class="eyebrow">Доступ</div><div class="footer-links"><a href="https://forms.gle/DLSGyZmvq5KvYivA8" target="_blank" rel="noopener">Подать заявку</a><a href="https://hub.twentypoundbird.com/lk/octavian-legacy">Личный кабинет</a><a href="https://discord.gg/Hvka4M8APX" target="_blank" rel="noopener">Discord-сервер</a></div></div></div>
+  <div class="copyright"><span>© 2026 «Наследие Октавиана»</span><span>Настольные ролевые игры (НРИ)</span></div>
+</div></footer>
+<script>
+  const nav=document.getElementById('nav'); const btn=document.getElementById('menuButton');
+  btn.addEventListener('click',()=>{const open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'✕':'☰'});
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☰'}));
+
+  const ruleFilters=document.querySelectorAll('.rule-filter');
+  const ruleItems=document.querySelectorAll('.rules .rule');
+  ruleFilters.forEach(filter=>filter.addEventListener('click',()=>{
+    const value=filter.dataset.filter;
+    ruleFilters.forEach(item=>{item.classList.toggle('is-selected',item===filter);item.setAttribute('aria-pressed',String(item===filter));});
+    ruleItems.forEach(rule=>rule.classList.toggle('is-hidden',value!=='all'&&!rule.classList.contains(value)));
+  }));
+</script>
+</body></html>
