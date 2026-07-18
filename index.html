@@ -294,8 +294,8 @@
 		
 		.feature-grid {
 			display: grid;
-			grid-template-columns: repeat(7, 1fr);
-			gap: 10px
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+			gap: 10px;
 		}
 		
 		.feature-card,
@@ -703,7 +703,7 @@
 				grid-template-columns: 1fr
 			}
 			.feature-grid {
-				grid-template-columns: repeat(4, 1fr)
+				grid-template-columns: repeat(3, minmax(0, 1fr));
 			}
 			.info-grid {
 				grid-template-columns: 1fr
@@ -800,7 +800,7 @@
 				<div class="hero-content">
 					<div class="eyebrow">Живая настольная ролевая кампания</div>
 					<h1>Наследие<br>Октавиана</h1>
-					<p>Мир меча и магии, где руины шепчут легенды, державы борются за влияние, а решения героев навсегда меняют ход истории.</p>
+					<p>В давние времена верховный волшебник Октавиан объединил весь мир под своим правлением. Но когда государства получили свободу самостоятельно вершить свою судьбу, созданное им единство начало распадаться. Теперь земли переходят из рук в руки, а государства, кланы и могущественные организации ведут борьбу за богатство и влияние.</p>
 					<div class="hero-actions">
 						<a class="button button-primary" href="https://forms.gle/DLSGyZmvq5KvYivA8" target="_blank" rel="noopener">Подать заявку</a>
 						<a class="button button-secondary" href="https://hub.twentypoundbird.com/lk/octavian-legacy">Личный кабинет</a>
@@ -818,38 +818,33 @@
 				<div class="feature-grid">
 					<article class="feature-card">
 						<img src="assets/icon-heroic.jpg" alt="">
-						<h3>Героическое фэнтези</h3>
-						<p>Эпические истории, сражения и магия.</p>
+						<h3>История важнее правил</h3>
+						<p>В центре игры — персонажи. История, решения игроков и логика мира важнее буквального следования правилам.</p>
 					</article>
 					<article class="feature-card">
 						<img src="assets/icon-regions.jpg" alt="">
-						<h3>Регионы и культуры</h3>
-						<p>Народы, континенты и разные традиции.</p>
+						<h3>Разные регионы — разные истории</h3>
+						<p>Войны, интриги, чудовища, исследования и мирная жизнь — характер приключений зависит от региона.</p>
 					</article>
 					<article class="feature-card">
-						<img src="assets/icon-prophecy.jpg" alt="">
-						<h3>Легенды и пророчества</h3>
-						<p>Ваш выбор способен изменить будущее.</p>
+						<img src="assets/icon-worldtree.jpg" alt="">
+						<h3>Живой общий мир</h3>
+						<p>Государства, кланы и организации действуют независимо, а события одной группы могут изменить жизнь других.</p>
 					</article>
 					<article class="feature-card">
 						<img src="assets/icon-dragon.jpg" alt="">
 						<h3>Подземелья и драконы</h3>
-						<p>Опасности, сокровища и чудовища.</p>
+						<p>Исследуй древние подземелья и забытые руины, сражайся с чудовищами, ищи сокровища и встречай настоящих драконов.</p>
 					</article>
 					<article class="feature-card">
 						<img src="assets/icon-classes.jpg" alt="">
 						<h3>Все расы и классы</h3>
-						<p>Свобода создать своего героя.</p>
-					</article>
-					<article class="feature-card">
-						<img src="assets/icon-worldtree.jpg" alt="">
-						<h3>Мир живёт всегда</h3>
-						<p>История продолжается между сессиями.</p>
+						<p>Свобода создать своего героя. Выбирай любую расу и класс, доступные в выбранной игровой системе.</p>
 					</article>
 					<article class="feature-card">
 						<img src="assets/icon-castle.jpg" alt="">
-						<h3>Создай империю</h3>
-						<p>Влияй на политику и оставь след.</p>
+						<h3>Создай своё наследие</h3>
+						<p>Основывай поселения, гильдии, государства, торговые дома или преступные империи.</p>
 					</article>
 				</div>
 			</div>
@@ -866,16 +861,16 @@
 						</div>
 						<ul class="info-list">
 							<li>
-								<strong>Пн–Чт — 16:15–20:45</strong>
-								<small>Сессия может начаться в любое запланированное время, главное, чтобы игра закончилась до 20:45.</small>
+								<strong>Пн–Чт — 16:15–20:45 (GMT+2)</strong>
+								<small>Начало согласуется с участниками. Сессия планируется так, чтобы завершиться до 20:45.</small>
 							</li>
 							<li>
-								<strong>Пт–Сб — 16:30–21:30</strong>
-								<small>Точное начало согласуется для выбранной партии.</small>
+								<strong>Пт–Сб — 16:30–21:30 (GMT+2)</strong>
+								<small>Точное время начала согласуется для выбранной партии.</small>
 							</li>
 							<li>
 								<strong>Продолжительность — 3–4 часа</strong>
-								<small>Для участия важно иметь свободное окно на всю сессию.</small>
+								<small>Для участия необходимо иметь свободное время на всю запланированную сессию.</small>
 							</li>
 						</ul>
 					</article>
@@ -885,11 +880,11 @@
 							<h3>О кампании</h3>
 						</div>
 						<ul class="info-list">
-							<li>Героическое фэнтези с меняющейся атмосферой.</li>
-							<li>Общий мир для нескольких параллельных групп.</li>
-							<li>Политика, войны, исследования и личные линии.</li>
-							<li>Решения игроков имеют долгосрочные последствия.</li>
-							<li>Онлайн-игра в дружелюбном сообществе.</li>
+							<li>Несколько групп могут играть в одном мире по независимым сюжетным линиям.</li>
+							<li>Персонажи могут переходить между группами, сохраняя свою историю.</li>
+							<li>Место начала и цели приключения согласуются с мастером.</li>
+							<li>Направление игры подстраивается под интересы участников.</li>
+							<li>Последствия приключений сохраняются в общем мире.</li>
 						</ul>
 					</article>
 				</div>
@@ -901,8 +896,8 @@
 				<div class="ornament"></div>
 				<p class="section-lead">Все правила доступны публично. Выберите статус, чтобы отфильтровать список.</p>
 				<div class="rules-toolbar" aria-label="Фильтр домашних правил">
-					<button class="rule-filter" type="button" data-filter="all" aria-pressed="true">Все</button>
-					<button class="rule-filter active-filter is-selected" type="button" data-filter="is-active" aria-pressed="false">Действующие</button>
+					<button class="rule-filter" type="button" data-filter="all" aria-pressed="false">Все</button>
+					<button class="rule-filter active-filter is-selected" type="button" data-filter="is-active" aria-pressed="true">Действующие</button>
 					<button class="rule-filter future-filter" type="button" data-filter="is-future" aria-pressed="false">В планах</button>
 					<button class="rule-filter canceled-filter" type="button" data-filter="is-canceled" aria-pressed="false">Отменённые</button>
 				</div>
@@ -1125,13 +1120,13 @@
 			<div class="container">
 				<h2>Как начать играть</h2>
 				<div class="ornament"></div>
-				<p class="section-lead">Три шага, после которых вы сможете выбрать подходящую партию и присоединиться к истории.</p>
+				<p class="section-lead">Три шага, после которых ты сможешь выбрать подходящую партию и присоединиться к истории.</p>
 				<div class="steps" style="margin-top:34px">
 					<article class="step">
 						<span class="step-number">1</span>
 						<img src="assets/icon-application.jpg" alt="">
 						<h3>Заполни заявку</h3>
-						<p>Расскажи о себе, игровом опыте, предпочтениях и персонаже. Это поможет понять, подойдём ли мы друг другу.</p>
+						<p>Расскажи о себе, игровом опыте, предпочтениях и персонаже.</p>
 					</article>
 					<article class="step">
 						<span class="step-number">2</span>
@@ -1188,8 +1183,8 @@
 				<div>
 					<div class="brand-name">Наследие
 						<br>Октавиана</div>
-					<p>Живой мир. Живые истории.
-						<br>Герои, меняющие ход эпох.</p>
+					<p>Живой мир. Общая история.
+						<br>Наследие, которое создают игроки.</p>
 				</div>
 				<div>
 					<div class="eyebrow">Навигация</div>
