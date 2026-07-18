@@ -407,6 +407,23 @@
 			color: var(--muted);
 			font-family: var(--sans)
 		}
+
+		.schedule-time {
+			display: block
+		}
+
+		.schedule-separator {
+			display: inline-block;
+			margin: 0 .32em
+		}
+
+		.schedule-source {
+			display: block;
+			margin-top: 5px;
+			color: #8f8778 !important;
+			font-size: .75rem;
+			line-height: 1.4
+		}
 		
 		.rules-preview {
 			background: linear-gradient(rgba(8, 16, 16, .78), rgba(8, 16, 16, .84)), url('assets/parchment.jpg') center/cover
@@ -860,13 +877,15 @@
 							<h3>Расписание</h3>
 						</div>
 						<ul class="info-list">
-							<li>
-								<strong>Пн–Чт — 16:15–20:45 (GMT+2)</strong>
-								<small>Начало согласуется с участниками. Сессия планируется так, чтобы завершиться до 20:45.</small>
+							<li class="schedule-slot" data-days="1,2,3,4" data-start="16:15" data-end="20:45">
+								<strong class="schedule-time"><span class="schedule-days">Пн–Чт</span><span class="schedule-separator" aria-hidden="true">—</span><span class="schedule-hours">16:15–20:45</span></strong>
+								<small>Начало согласуется с участниками. Сессия планируется так, чтобы завершиться в пределах указанного времени.</small>
+								<small class="schedule-source">Используется ваш часовой пояс. Исходное время: Пн–Чт, 16:15–20:45 · Белград</small>
 							</li>
-							<li>
-								<strong>Пт–Сб — 16:30–21:30 (GMT+2)</strong>
+							<li class="schedule-slot" data-days="5,6" data-start="16:30" data-end="21:30">
+								<strong class="schedule-time"><span class="schedule-days">Пт–Сб</span><span class="schedule-separator" aria-hidden="true">—</span><span class="schedule-hours">16:30–21:30</span></strong>
 								<small>Точное время начала согласуется для выбранной партии.</small>
+								<small class="schedule-source">Используется ваш часовой пояс. Исходное время: Пт–Сб, 16:30–21:30 · Белград</small>
 							</li>
 							<li>
 								<strong>Продолжительность — 3–4 часа</strong>
@@ -1226,8 +1245,68 @@
 			ruleFilters.forEach(item => {
 				item.classList.toggle('is-selected', item === filter);item.setAttribute('aria-pressed', String(item === filter));
 			});
-			ruleItems.forEach(rule => rule.classList.toggle('is-hidden', value !== 'all' && !rule.classList.contains(value)));
+				ruleItems.forEach(rule => rule.classList.toggle('is-hidden', value !== 'all' && !rule.classList.contains(value)));
 		}));
+
+		const campaignTimeZone = 'Europe/Belgrade';
+		const visitorTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+
+		const getOffsetMinutes = (timeZone, date) => {
+			const parts = new Intl.DateTimeFormat('en-CA', {
+				timeZone,
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit',
+				second: '2-digit',
+				hourCycle: 'h23'
+			}).formatToParts(date).reduce((result, part) => {
+				if (part.type !== 'literal') result[part.type] = Number(part.value);
+				return result;
+			}, {});
+
+			const utcValue = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+			return Math.round((utcValue - Math.floor(date.getTime() / 1000) * 1000) / 60000);
+		};
+
+		const normaliseMinutes = minutes => ((minutes % 1440) + 1440) % 1440;
+		const dayShift = minutes => Math.floor(minutes / 1440);
+		const formatTime = minutes => {
+			const normalised = normaliseMinutes(minutes);
+			return String(Math.floor(normalised / 60)).padStart(2, '0') + ':' + String(normalised % 60).padStart(2, '0');
+		};
+
+		const dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+		const shiftWeekday = (day, shift) => ((day + shift) % 7 + 7) % 7;
+		const formatDayRange = days => {
+			if (days.length === 1) return dayNames[days[0]];
+			const consecutive = days.every((day, index) => index === 0 || day === (days[index - 1] + 1) % 7);
+			return consecutive ? dayNames[days[0]] + '–' + dayNames[days[days.length - 1]] : days.map(day => dayNames[day]).join(', ');
+		};
+
+		try {
+			const now = new Date();
+			const campaignOffset = getOffsetMinutes(campaignTimeZone, now);
+			const visitorOffset = getOffsetMinutes(visitorTimeZone, now);
+			const difference = visitorOffset - campaignOffset;
+			document.querySelectorAll('.schedule-slot').forEach(slot => {
+				const days = slot.dataset.days.split(',').map(Number);
+				const [startHours, startMinutes] = slot.dataset.start.split(':').map(Number);
+				const [endHours, endMinutes] = slot.dataset.end.split(':').map(Number);
+				const convertedStart = startHours * 60 + startMinutes + difference;
+				const convertedEnd = endHours * 60 + endMinutes + difference;
+				const startDayShift = dayShift(convertedStart);
+				const endDayShift = dayShift(convertedEnd);
+				const convertedDays = days.map(day => shiftWeekday(day, startDayShift));
+				const crossesDate = endDayShift !== startDayShift;
+
+				slot.querySelector('.schedule-days').textContent = formatDayRange(convertedDays);
+				slot.querySelector('.schedule-hours').textContent = formatTime(convertedStart) + '–' + formatTime(convertedEnd) + (crossesDate ? ' следующего дня' : '');
+			});
+		} catch (error) {
+			// Если часовой пояс определить не удалось, остаётся исходное время по Белграду.
+		}
 	</script>
 </body>
 
